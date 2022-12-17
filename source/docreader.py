@@ -4,7 +4,7 @@ from pprint import pprint
 
 class read_doc():
     def __init__(self) -> None:
-        # self.doc = pd.read_csv('data/crime.csv', encoding= 'ISO-8859-1').to_dict()
+        # self.doc = pd.read_csv('data/crime.csv', encoding= 'ISO-8859-1').to_dict() 
         pass
     def db_insert(self):
         pass
@@ -63,7 +63,7 @@ query = { '$and': [{"GEO_LAT": 39.7616457} , {"GEO_LON": -105.0241665}] }
 # query = { 'OFFENSE_CODE': 3501, 'OFFENSE_CODE_EXTENSION': 0}
 query_attributes = ['OFFENSE_TYPE_ID', 'FIRST_OCCURRENCE_DATE', 'INCIDENT_ADDRESS', 'NEIGHBORHOOD_ID']
 # query_attributes = None
-# query = { 'incident_id': 2017421909}
+# query = { 'incident_id': 2017421909} 
 
 query_list = crime_codes.db_find(mongo_db, 'Crime', 'Denver_Crime', query, query_attributes)
 

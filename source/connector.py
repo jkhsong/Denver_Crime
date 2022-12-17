@@ -3,7 +3,7 @@ from pymongo import MongoClient
 
 class User():
     def __init__(self):
-        self.username = 'user1'
+        self.username = 'user2'
         self.password = 'password'
 class DBConnector():
     def __init__(self):
