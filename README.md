@@ -15,7 +15,7 @@ Denver_Crime initially started as a small hobby project with a <b>Flask, JavaScr
 The purpose of Denver_Crime is to take <a href = "https://www.kaggle.com/datasets/paultimothymooney/denver-crime-data"> DenverPD's publicly available crime data </a> from 2017 to 2022, and make it queryable with interactive elements.<br><br>  
 
 <b><h3>2. Progress</h3></b>
-1. Denver crime data, as well as offense codes, were injected, then queried from <b>MongoDB</b> using <b>PyMongo</b>.
+1. Denver crime data as well as crime offense codes were extracted from CSVs and inserted into <b>MongoDB</b> using <b>PyMongo</b>.
 2. <b>Flask</b> and <b>MongoDB Query Language (MQL)</b> were used for custom form-based queries and table outputs (more to come!).
 3. Various higher-level analyses (i.e. average time between specified crime types, time windows with the most crime, areas with the most crime types). 
 4. Initial CSS styling and layout was provided via <b>Bootstrap</b> and [<b>Grayscale</b>](https://github.com/StartBootstrap/startbootstrap-grayscale).  This provided an expedient path to our MVP, and a way to quickly validate our previous work.  
