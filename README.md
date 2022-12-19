@@ -2,7 +2,7 @@
 
 <br>
 <p align = "center">
-<img src="readme_images/homepage.png" width=70% height=70%><br>
+<img src="readme_images/homepage.png" width=90% height=90%><br>
 <b>Figure 1. Home page for Denver Crime.</b>  
 </p>
 <br>
@@ -22,7 +22,7 @@ The purpose of Denver_Crime is to take [DenverPD's publicly available crime data
 
 <br>
 <p align = "center">
-<img src="readme_images/queryselect.png" width=70% height=70%><br>
+<img src="readme_images/queryselect.png" width=90% height=90%><br>
 <b>Figure 2. Selecting type of crime to examine.</b>  
 </p>
 <br>
@@ -34,7 +34,7 @@ The purpose of Denver_Crime is to take [DenverPD's publicly available crime data
 
 <br>
 <p align = "center">
-<img src="readme_images/queryresults.png" width=70% height=70%><br>
+<img src="readme_images/queryresults.png" width=90% height=90%><br>
 <b>Figure 3. Query results for "White Collar Crime".</b>  
 </p>
 <br>
