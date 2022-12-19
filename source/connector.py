@@ -5,11 +5,10 @@ class User():
     def __init__(self):
         self.username = 'user2'
         self.password = 'password'
+
 class DBConnector():
     def __init__(self):
-        self.username = 'acf'
-        self.password = '1'
-
+        self.User = User()
 
 class MongoConnector(DBConnector):
     def __init__(self):
