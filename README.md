@@ -12,7 +12,7 @@
 Denver_Crime initially started as a small hobby project with a <b>Flask, JavaScript, MongoDB, and Python</b> stack, and grew due to interest from friends in local law-enforcement.  The front end is currently being tested with Vue.js.
 
 <p><b><h3>1. Introduction</h3></b>
-The purpose of Denver_Crime is to take [DenverPD's publicly available crime data](https://www.kaggle.com/datasets/paultimothymooney/denver-crime-data) from 2017 to 2022, and make it queryable with interactive elements.<br><br>  
+The purpose of Denver_Crime is to take <a href = "https://www.kaggle.com/datasets/paultimothymooney/denver-crime-data"> DenverPD's publicly available crime data </a> from 2017 to 2022, and make it queryable with interactive elements.<br><br>  
 
 <b><h3>2. Progress</h3></b>
 1. Denver crime data, as well as offense codes, were injected, then queried from <b>MongoDB</b> using <b>PyMongo</b>.
