@@ -1,10 +1,12 @@
 import pandas as pd
-import connector as ct
+import source.connector as ct
+from source.dateparser import date_sorter
 from pprint import pprint
 
 class read_doc():
     def __init__(self) -> None:
-        # self.doc = pd.read_csv('data/crime.csv', encoding= 'ISO-8859-1').to_dict() 
+        # self.doc = pd.read_csv('data/crime.csv', encoding= 'ISO-8859-1').to_dict()
+
         pass
     def db_insert(self):
         pass
@@ -47,12 +49,24 @@ class mongo_read(read_doc):
         else:
             return_dict = None
         
+        if "FIRST_OCCURRENCE_DATE" in returnfields:
+            sort_param = "FIRST_OCCURRENCE_DATE"
+        elif len(returnfields) == 0:
+            return []
+        else:
+            sort_param = returnfields[0]
+
         db = mongo_connect[dbname]
         col = db[colname]
-        query_results = col.find(query, return_dict)
+
+        query_results = col.find(query, return_dict).sort(sort_param).limit(50)
         query_list = []
         for record in query_results:
             query_list.append(record)
+
+        if "FIRST_OCCURRENCE_DATE" in returnfields:
+            query_list = date_sorter(query_list)
+
         return query_list
 
 
@@ -67,8 +81,10 @@ query_attributes = ['OFFENSE_TYPE_ID', 'FIRST_OCCURRENCE_DATE', 'INCIDENT_ADDRES
 
 query_list = crime_codes.db_find(mongo_db, 'Crime', 'Denver_Crime', query, query_attributes)
 
-crime_codes.print_records(query_list)
+# crime_codes.print_records(query_list)
 
+df = pd.DataFrame(query_list)
+print('hi')
 ## figure out how to sort by attribute
 
 
