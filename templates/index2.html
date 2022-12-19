@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crime in Denver: Query Results</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <style>
+      .container {
+        max-width: 1000px;
+      }
+
+      body { background: navy;
+             color: whitesmoke}
+      th { text-align: center; color:red; padding-left: 10px; padding-right: 10px;}
+      td { text-align: center;}
+      .Crime-Results{ margin:0 auto; }
+    </style>
+</head>
+<body>
+<table class = "Crime-Results">
+{% for table in tables %}
+            {{ table|safe }}
+{% endfor %}
+</table>
+</body>
+</html>
