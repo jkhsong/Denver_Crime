@@ -22,7 +22,7 @@ Denver Crime takes nearly 400,000 of <a href = "https://www.kaggle.com/datasets/
 
 
 <b><h2>What does it do? </h2></b>
-With the intent of making a full-stack testbed that I could use in the future (with a little ML sprinkled on top), I had to structure carefully.  I started by:
+With the intent of making a full-stack testbed that I could easily repurpose for more complex projects in the future, I had to structure/OOP carefully.  I started by:
 1. Extracting Crime data and Offense Codes from CSVs and inserting into a NoSQL DB using <b>MongoDB</b> using <b>PyMongo</b>.
 2. Using <b>Flask</b> and <b>MongoDB Query Language (MQL)</b> for form-based queries and table outputs (with more query types and analyses to come).
 3. Conducting higher-level analyses in Python (i.e. average time between specified crime types, time windows with the most crime, areas with the most crime types). 
