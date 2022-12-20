@@ -1,5 +1,6 @@
 import pandas as pd
 import source.connector as ct
+from source.queries import ret_dict, query_parser
 from source.dateparser import date_sorter
 from pprint import pprint
 
@@ -18,7 +19,6 @@ class mongo_read(read_doc):
 
     def csv_to_json(self, filename):
         data = pd.read_csv(filename)
-        datadict = data.to_dict()
         return data.to_dict()
 
     def print_records(self, query_results):
@@ -41,13 +41,7 @@ class mongo_read(read_doc):
             col.insert_one(row)
 
     def db_find(self, mongo_connect, dbname, colname, query, returnfields = None):
-        if returnfields is not None:
-            return_dict = {}
-            return_dict['_id'] = False
-            for item in returnfields:
-                return_dict[item] = True
-        else:
-            return_dict = None
+        return_dict = ret_dict(returnfields)
         
         if "FIRST_OCCURRENCE_DATE" in returnfields:
             sort_param = "FIRST_OCCURRENCE_DATE"
@@ -60,12 +54,8 @@ class mongo_read(read_doc):
         col = db[colname]
 
         query_results = col.find(query, return_dict).sort(sort_param).limit(50)
-        query_list = []
-        for record in query_results:
-            query_list.append(record)
-
-        if "FIRST_OCCURRENCE_DATE" in returnfields:
-            query_list = date_sorter(query_list)
+        
+        query_list = query_parser(query_results, returnfields)
 
         return query_list
 

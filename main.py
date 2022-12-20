@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import source.connector as ct
 import source.docreader as dr
-from source.queries import parse_input
+from source.queries import parse_input, add_crime_ids, rem_attrs, dict_match_on_crime
 
 app = Flask(__name__)
 
@@ -22,10 +22,16 @@ def index():
         # query = { '$and': [{"GEO_LAT": 39.7616457} , {"GEO_LON": -105.0241665}] }
         # query = { 'OFFENSE_CODE': 3501, 'OFFENSE_CODE_EXTENSION': 0}
         query_attributes = formfilters
+        query_attributes = add_crime_ids(query_attributes)
         # query_attributes = None
         # query = { 'incident_id': 2017421909} 
 
         query_list = crime_codes.db_find(mongo_db, 'Crime', 'Denver_Crime', query, query_attributes)
+        query_list = dict_match_on_crime(mongo_db,query_list,query_attributes)
+        
+        remove_attributes = ['OFFENSE_CODE', 'OFFENSE_CODE_EXTENSION']
+        query_list = rem_attrs(query_list, remove_attributes)
+
         if len(query_list) == 0:
             noquery = pd.DataFrame.from_dict([{'Welcome': 'queries.  Please enter a new query.'}])
 

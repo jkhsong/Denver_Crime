@@ -1,4 +1,5 @@
 import source.connector as ct
+from source. dateparser import date_sorter
 
 def parse_input(form):
         headers = { 'fid': "_id",
@@ -53,3 +54,80 @@ def parse_input(form):
                 else:
                     queryfilters.append({queryterms[item]: form[item]})
         return formfilters,queryfilters
+
+def col_join_on_crime(mongodb, col1string, col2string):
+    db = mongodb['Crime']
+    
+    return db[col2string].aggregate([
+    {
+        "$lookup": {
+            "from": col1string,
+            "localField": "OFFENSE_CODE",
+            "foreignField": "OFFENSE_CODE",
+            "as": "linked_crime"
+            }
+    },
+    {
+        "$unwind": "$linked_crime"
+    },
+    {
+        "$project": {
+            'crime_name': { '$cond': [ { '$eq': [ '$OFFENSE_TYPE_NAME', '$linked_crime.crime_name' ] }, 1, 0] } 
+            }
+    },
+    {'$match' : { 'crime_name' : 1}}
+    ])
+
+def add_crime_ids(query_attributes):
+    query_attributes.append('OFFENSE_CODE')
+    query_attributes.append('OFFENSE_CODE_EXTENSION')
+    return query_attributes
+
+def rem_attrs(dicts, listofattributes):
+    for item in dicts:
+        for attribute in listofattributes:
+            item.pop(attribute, None)
+    return dicts
+
+def ret_dict(returnfields):
+    if returnfields is not None:
+        return_dict = {}
+        return_dict['_id'] = False
+        for item in returnfields:
+            return_dict[item] = True
+    else:
+        return_dict = None
+    return return_dict
+
+def query_parser(query_results, returnfields):
+    query_list = []
+    for record in query_results:
+        query_list.append(record)
+
+    if "FIRST_OCCURRENCE_DATE" in returnfields:
+        query_list = date_sorter(query_list)
+    
+    return query_list
+
+def dict_match_on_crime(mongodb, query_list, query_attributes):
+    db = mongodb['Crime']
+    col = db['Offense_Codes']
+
+    return_dict = ret_dict(query_attributes)
+
+    for incident_dict in query_list:
+        code = int(incident_dict['OFFENSE_CODE'])
+        ext = int(incident_dict['OFFENSE_CODE_EXTENSION'])
+        queryfilters = [{'OFFENSE_CODE': code}, {'OFFENSE_CODE_EXTENSION': ext}]
+    
+    query = { '$and': [item for item in queryfilters] }
+    crime_code_results = col.find(query, return_dict).limit(1)
+
+    crime_code_results = query_parser(crime_code_results)
+
+
+    return query_list
+
+# crime_db = ct.MongoConnector()
+# mongo_db = crime_db.startup_db_client()
+# print(col_join_on_crime(mongo_db,'Denver_Crime','Offense_Codes'))
