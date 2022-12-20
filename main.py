@@ -44,8 +44,8 @@ def index():
         df = pd.DataFrame(query_list)
         df.fillna('', inplace=True)
         
-        # map = plot_map(df, 1,1)
-        # script, div = components(map)
+        map = plot_map(df, 1,1)
+        script, div = components(map)
 
         query_final = rem_attrs(query_final, ['GEO_LON', 'GEO_LAT'])
         df = pd.DataFrame(query_final)
