@@ -29,7 +29,7 @@ def index():
         query_list = crime_codes.db_find(mongo_db, 'Crime', 'Denver_Crime', query, query_attributes)
         query_list = dict_match_on_crime(mongo_db,query_list,query_attributes)
         
-        remove_attributes = ['OFFENSE_CODE', 'OFFENSE_CODE_EXTENSION']
+        remove_attributes = ['OFFENSE_CODE', 'OFFENSE_CODE_EXTENSION', 'OFFENSE_TYPE_ID']
         query_list = rem_attrs(query_list, remove_attributes)
 
         if len(query_list) == 0:

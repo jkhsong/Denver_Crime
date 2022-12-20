@@ -114,16 +114,17 @@ def dict_match_on_crime(mongodb, query_list, query_attributes):
     col = db['Offense_Codes']
 
     return_dict = ret_dict(query_attributes)
+    return_dict['OFFENSE_TYPE_NAME'] = True
 
     for incident_dict in query_list:
         code = int(incident_dict['OFFENSE_CODE'])
         ext = int(incident_dict['OFFENSE_CODE_EXTENSION'])
         queryfilters = [{'OFFENSE_CODE': code}, {'OFFENSE_CODE_EXTENSION': ext}]
     
-    query = { '$and': [item for item in queryfilters] }
-    crime_code_results = col.find(query, return_dict).limit(1)
-
-    crime_code_results = query_parser(crime_code_results)
+        query = { '$and': [item for item in queryfilters] }
+        crime_code_result = col.find(query, return_dict).limit(1)
+        crime_code_result = query_parser(crime_code_result, ['OFFENSE_CODE', 'OFFENSE_CODE_EXTENSION', 'OFFENSE_TYPE_NAME'])
+        incident_dict['OFFENSE_TYPE_NAME'] = crime_code_result[0]['OFFENSE_TYPE_NAME']
 
 
     return query_list
