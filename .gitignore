@@ -1,4 +1,5 @@
 /data/crime.csv
+/source/__pycache__/
 /source/__pycache__/__init__.cpython-310.pyc
 /source/__pycache__/dateparser.cpython-310.pyc
 /source/__pycache__/docreader.cpython-310.pyc
