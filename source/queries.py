@@ -83,6 +83,11 @@ def add_crime_ids(query_attributes):
     query_attributes.append('OFFENSE_CODE_EXTENSION')
     return query_attributes
 
+def add_geo_attr(query_attributes):
+    query_attributes.append('GEO_LON')
+    query_attributes.append('GEO_LAT')
+    return query_attributes
+
 def rem_attrs(dicts, listofattributes):
     for item in dicts:
         for attribute in listofattributes:

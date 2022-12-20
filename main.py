@@ -3,7 +3,9 @@ import pandas as pd
 import numpy as np
 import source.connector as ct
 import source.docreader as dr
-from source.queries import parse_input, add_crime_ids, rem_attrs, dict_match_on_crime
+from source.queries import parse_input, add_crime_ids, add_geo_attr, rem_attrs, dict_match_on_crime
+from source.mapping import plot_map
+from bokeh.embed import components
 
 app = Flask(__name__)
 
@@ -23,6 +25,7 @@ def index():
         # query = { 'OFFENSE_CODE': 3501, 'OFFENSE_CODE_EXTENSION': 0}
         query_attributes = formfilters
         query_attributes = add_crime_ids(query_attributes)
+        query_attributes = add_geo_attr(query_attributes)
         # query_attributes = None
         # query = { 'incident_id': 2017421909} 
 
@@ -37,10 +40,21 @@ def index():
 
             return render_template('index.html', tables = [noquery.to_html(classes="data")], titles=noquery.columns.values)
         # crime_codes.print_records(query_list)
-
+        query_final = query_list
         df = pd.DataFrame(query_list)
         df.fillna('', inplace=True)
-        return render_template('index.html',  tables=[df.to_html(classes="data")], titles=df.columns.values)
+        
+        # map = plot_map(df, 1,1)
+        # script, div = components(map)
+
+        query_final = rem_attrs(query_final, ['GEO_LON', 'GEO_LAT'])
+        df = pd.DataFrame(query_final)
+        df.fillna('', inplace=True)
+
+        try:
+            return render_template('index.html',  tables=[df.to_html(classes="data")], script=script, div=div)
+        except:
+            return render_template('index.html',  tables=[df.to_html(classes="data")])
     else:
         return render_template('index.html',  tables=[])
 

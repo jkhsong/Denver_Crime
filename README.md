@@ -18,26 +18,33 @@ The purpose of Denver_Crime is to take <a href = "https://www.kaggle.com/dataset
 1. Denver crime data as well as crime offense codes were extracted from CSVs and inserted into <b>MongoDB</b> using <b>PyMongo</b>.
 2. <b>Flask</b> and <b>MongoDB Query Language (MQL)</b> were used for custom form-based queries and table outputs (more to come!).
 3. Various higher-level analyses (i.e. average time between specified crime types, time windows with the most crime, areas with the most crime types). 
-4. Initial CSS styling and layout was provided via <b>Bootstrap</b> and [<b>Grayscale</b>](https://github.com/StartBootstrap/startbootstrap-grayscale).  This provided an expedient path to our MVP, and a way to quickly validate our previous work.  
+4. Interactive visualization of incidents on a map of Denver.
+5. Initial CSS styling and layout was provided via <b>Bootstrap</b> and [<b>Grayscale</b>](https://github.com/StartBootstrap/startbootstrap-grayscale).  This provided an expedient path to our MVP, and a way to quickly validate our previous work.  
 
-<br>
-<p align = "center">
+<!-- <p align = "center">
 <img src="readme_images/queryselect.png" width=90% height=90%><br>
 <b>Figure 2. Selecting type of crime to examine.</b>  
 </p>
+<br> -->
 <br>
-
+<p align = "center">
+<img src="readme_images/queryresults.png" width=90% height=90%><br>
+<b>Figure 2. Query results for "White Collar Crime".</b>  
+</p>
+<br>
 
 <b><h3>3. Thoughts</h3></b>
 * Some incidents within the original dataset seem binned into a specific day (i.e., there are dozens of incidents occuring on midnight, January 1, 2018).  This needs to be taken into account if time analysis for certain phenomena (i.e. "crime-waves"), thought it has less of an impact on certain calculations such as mean time between incidents.
 * <b>PostgreSQL</b> would have also been perfect for this project (though I may be biased due to familiarity with Postgres).  The rationale for using MongoDB was to perform higher-level queries in MQL.
+<br>
 
 <br>
 <p align = "center">
-<img src="readme_images/queryresults.png" width=90% height=90%><br>
-<b>Figure 3. Query results for "White Collar Crime".</b>  
+<img src="readme_images/mapquery2.png" width=90% height=90%><br>
+<b>Figure 3. Mapped query results (red dots), and tooltip information on mouse-over of each incident.</b>  
 </p>
 <br>
+
 
 <b><h3>4. Future work</h3></b>
 1. Integrating [Denver City's address database](https://www.denvergov.org/opendata/dataset/city-and-county-of-denver-addresses) for additional incident address information (building type: apartment, etc.).  A business address database is also available for further locational information. 
@@ -47,5 +54,5 @@ The purpose of Denver_Crime is to take <a href = "https://www.kaggle.com/dataset
  * "Crime hotspots over time": A visualization of crime hotspots over time.
  * "Risky buildings": A simple inference on building types with the highest incidences of crime.
 3. Implementation of Vue.js elements.
-4. Interactive visualization of incidents on a map of Denver.
-5. Containerization and deployment to AWS using Docker.
+4. Containerization and deployment to AWS using Docker.
+
