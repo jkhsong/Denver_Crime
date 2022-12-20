@@ -1,52 +1,62 @@
-## Denver_Crime
+<b><h1>Denver Crime</h1></b>
 
 <br>
 <p align = "center">
 <img src="readme_images/homepage.png" width=90% height=90%><br>
-<b>Figure 1. Home page for Denver Crime.</b>  
 </p>
 <br>
 
-<h2>Project Outline</h2>
+<b><h2>Why this project?</h2></b>
 
-Denver_Crime initially started as a small hobby project with a <b>Flask, JavaScript, MongoDB, and Python</b> stack, and grew due to interest from friends in local law-enforcement.  The front end is currently being tested with Vue.js.
+Denver Crime initially started as a small, fun project with a <b>Flask, JavaScript, MongoDB, and Python</b> stack, and grew due to interest from friends in local law-enforcement.  The front end is currently being tested with Vue.js.<br><br>
 
-<p><b><h3>1. Introduction</h3></b>
-The purpose of Denver_Crime is to take <a href = "https://www.kaggle.com/datasets/paultimothymooney/denver-crime-data"> DenverPD's publicly available crime data </a> from 2017 to 2022, and make it queryable with interactive elements.<br><br>  
+<p><b><h2>The Dataset</h2></b>
+Denver Crime takes nearly 400,000 of <a href = "https://www.kaggle.com/datasets/paultimothymooney/denver-crime-data"> DenverPD's recorded incidents </a> from 2017 to 2022, and stores them in a NoSQL database.  Users can make queries through a web form to return query results, which are presented as tables and visual/interactive elements.<br><br>
 
-<b><h3>2. Progress</h3></b>
-1. Denver crime data as well as crime offense codes were extracted from CSVs and inserted into <b>MongoDB</b> using <b>PyMongo</b>.
-2. <b>Flask</b> and <b>MongoDB Query Language (MQL)</b> were used for custom form-based queries and table outputs (more to come!).
-3. Various higher-level analyses (i.e. average time between specified crime types, time windows with the most crime, areas with the most crime types). 
-4. Interactive visualization of incidents on a map of Denver.
-5. Initial CSS styling and layout was provided via <b>Bootstrap</b> and [<b>Grayscale</b>](https://github.com/StartBootstrap/startbootstrap-grayscale).  This provided an expedient path to our MVP, and a way to quickly validate our previous work.  
+<br>
+<p align = "center">
+<b>Making an initial query by crime type</b>  
+<img src="readme_images/queryselect.png" width=90% height=90%><br>
+</p>
+<br>
+
+
+<b><h2>What does it do? </h2></b>
+With the intent of making a full-stack testbed that I could use in the future (with a little ML sprinkled on top), I had to structure carefully.  I started by:
+1. Extracting Crime data and Offense Codes from CSVs and inserting into a NoSQL DB using <b>MongoDB</b> using <b>PyMongo</b>.
+2. Using <b>Flask</b> and <b>MongoDB Query Language (MQL)</b> for form-based queries and table outputs (with more query types and analyses to come).
+3. Conducting higher-level analyses in Python (i.e. average time between specified crime types, time windows with the most crime, areas with the most crime types). 
+4. Forming interactive visualizations of incidents (maps with tooltips, so far) on user queries using <b>Bokeh</b>.
+*Initial CSS styling and layout were provided via <b>Bootstrap</b> and [<b>Grayscale</b>](https://github.com/StartBootstrap/startbootstrap-grayscale).
 
 <!-- <p align = "center">
 <img src="readme_images/queryselect.png" width=90% height=90%><br>
 <b>Figure 2. Selecting type of crime to examine.</b>  
 </p>
 <br> -->
+
 <br>
 <p align = "center">
+<b>Query results for "White Collar Crime"</b> 
 <img src="readme_images/queryresults.png" width=90% height=90%><br>
-<b>Figure 2. Query results for "White Collar Crime".</b>  
+ 
 </p>
 <br>
 
-<b><h3>3. Thoughts</h3></b>
+<b><h2>Challenges?</h2></b>
 * Some incidents within the original dataset seem binned into a specific day (i.e., there are dozens of incidents occuring on midnight, January 1, 2018).  This needs to be taken into account if time analysis for certain phenomena (i.e. "crime-waves"), thought it has less of an impact on certain calculations such as mean time between incidents.
-* <b>PostgreSQL</b> would have also been perfect for this project (though I may be biased due to familiarity with Postgres).  The rationale for using MongoDB was to perform higher-level queries in MQL.
+* <b>PostgreSQL</b> would have also been perfect for this project (though I may be biased due to familiarity with Postgres).  The rationale for using MongoDB was to perform higher-level queries in MQL, and with the new $lookup function, inner/left/outer multi-attribute joins were easy to implement and fast to execute!
 <br>
 
 <br>
 <p align = "center">
+<b>Mapped query results (red dots), and tooltip information on mouse-over of each incident</b> 
 <img src="readme_images/mapquery2.png" width=90% height=90%><br>
-<b>Figure 3. Mapped query results (red dots), and tooltip information on mouse-over of each incident.</b>  
 </p>
 <br>
 
 
-<b><h3>4. Future work</h3></b>
+<b><h2>What's left?</h2></b>
 1. Integrating [Denver City's address database](https://www.denvergov.org/opendata/dataset/city-and-county-of-denver-addresses) for additional incident address information (building type: apartment, etc.).  A business address database is also available for further locational information. 
 2. Additional inferences:
  * "Crime waves": Time-clustered incidences of crime.
