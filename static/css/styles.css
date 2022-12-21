@@ -499,6 +499,12 @@ progress {
   display: none !important;
 }
 
+.centered {
+  display: inline-block;
+  margin: auto;
+  width: 950px;
+  }
+
 .lead {
   font-size: 1.25rem;
   font-weight: 300;
