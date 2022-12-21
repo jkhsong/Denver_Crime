@@ -15,46 +15,45 @@ Denver Crime takes nearly 400,000 of <a href = "https://www.kaggle.com/datasets/
 
 <br>
 <p align = "center">
-<b>Making an initial query by crime type</b>  
-<img src="readme_images/queryselect.png" width=90% height=90%><br>
+<b>Making an incident query by crime type</b>  
+<img src="readme_images/querying.gif" width=90% height=90%><br>
 </p>
 <br>
 
 
 <b><h2>What does it do? </h2></b>
 With the intent of making a full-stack testbed that I could easily repurpose for more complex projects in the future, I had to structure/OOP carefully.  I started by:
-1. Extracting Crime data and Offense Codes from CSVs and inserting into a NoSQL DB using <b>MongoDB</b> using <b>PyMongo</b>.
+1. Extracting Crime data and Offense Codes from CSVs and inserting parsed data into a NoSQL DB using <b>MongoDB</b> using <b>PyMongo</b>.
 2. Using <b>Flask</b> and <b>MongoDB Query Language (MQL)</b> for form-based queries and table outputs (with more query types and analyses to come).
 3. Conducting higher-level analyses in Python (i.e. average time between specified crime types, time windows with the most crime, areas with the most crime types). 
 4. Forming interactive visualizations of incidents (maps with tooltips, so far) on user queries using <b>Bokeh</b>.
 *Initial CSS styling and layout were provided via <b>Bootstrap</b> and [<b>Grayscale</b>](https://github.com/StartBootstrap/startbootstrap-grayscale).
+
+<br>
+<p align = "center">
+<b>Mapped query results (red dots), and tooltip information from database on mouse-over of each incident</b> 
+<img src="readme_images/mapdemo.gif" width=90% height=90%><br>
+</p>
+<br>
 
 <!-- <p align = "center">
 <img src="readme_images/queryselect.png" width=90% height=90%><br>
 <b>Figure 2. Selecting type of crime to examine.</b>  
 </p>
 <br> -->
-
+<!-- 
 <br>
 <p align = "center">
 <b>Query results for "White Collar Crime"</b> 
 <img src="readme_images/queryresults.png" width=90% height=90%><br>
  
 </p>
-<br>
+<br> -->
 
 <b><h2>Challenges?</h2></b>
 * Some incidents within the original dataset seem binned into a specific day (i.e., there are dozens of incidents occuring on midnight, January 1, 2018).  This needs to be taken into account if time analysis for certain phenomena (i.e. "crime-waves"), thought it has less of an impact on certain calculations such as mean time between incidents.
 * <b>PostgreSQL</b> would have also been perfect for this project (though I may be biased due to familiarity with Postgres).  The rationale for using MongoDB was to perform higher-level queries in MQL, and with the new $lookup function, inner/left/outer multi-attribute joins were easy to implement and fast to execute!
 <br>
-
-<br>
-<p align = "center">
-<b>Mapped query results (red dots), and tooltip information on mouse-over of each incident</b> 
-<img src="readme_images/mapquery2.png" width=90% height=90%><br>
-</p>
-<br>
-
 
 <b><h2>What's left?</h2></b>
 1. Integrating [Denver City's address database](https://www.denvergov.org/opendata/dataset/city-and-county-of-denver-addresses) for additional incident address information (building type: apartment, etc.).  A business address database is also available for further locational information. 
