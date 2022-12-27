@@ -55,6 +55,13 @@ With the intent of making a full-stack testbed that I could easily repurpose for
 * <b>PostgreSQL</b> would have also been perfect for this project (though I may be biased due to familiarity with Postgres).  The rationale for using MongoDB was to perform higher-level queries in MQL, and with the new $lookup function, inner/left/outer multi-attribute joins were easy to implement and fast to execute!
 <br>
 
+<br>
+<p align = "center">
+<b>Query Results over Time in Plotly</b> 
+<img src="readme_images/dvovertime.gif" width=90% height=90%><br>
+</p>
+<br>
+
 <b><h2>What's left?</h2></b>
 1. Integrating [Denver City's address database](https://www.denvergov.org/opendata/dataset/city-and-county-of-denver-addresses) for additional incident address information (building type: apartment, etc.).  A business address database is also available for further locational information. 
 2. Additional inferences:
