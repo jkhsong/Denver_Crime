@@ -8,7 +8,14 @@
 
 <b><h2>Why this project?</h2></b>
 
-Denver Crime initially started as a small, fun project with a <b>Flask, JavaScript, MongoDB, and Python</b> stack, and grew due to interest from friends in local law-enforcement.  The front end is currently being tested with Vue.js.<br><br>
+Denver Crime initially started as a small, fun project with <b>Flask, JavaScript, MongoDB, and Python</b>, and grew due to interest from friends in local law-enforcement.  It is currently being tested with Vue.js.<br><br>
+
+<br>
+<p align = "center">
+<b>Quick look at the data by incident type</b>
+<img src="readme_images/crimebreakdown.png" width=90% height=90%><br>
+</p>
+<br>
 
 <p><b><h2>The Dataset</h2></b>
 Denver Crime takes nearly 400,000 of <a href = "https://www.kaggle.com/datasets/paultimothymooney/denver-crime-data"> DenverPD's recorded incidents </a> from 2017 to 2022, and stores them in a NoSQL database.  Users can make queries through a web form to return query results, which are presented as tables and visual/interactive elements.<br><br>
