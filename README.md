@@ -12,8 +12,9 @@ Denver Crime initially started as a small, fun project with <b>Flask, JavaScript
 
 <br>
 <p align = "center">
-<b>Quick look at the data by incident type</b>
-<img src="readme_images/crimebreakdown.png" width=90% height=90%><br>
+<b>Initial look at the data by incident type</b><br>
+<img src="readme_images/crimebreakdown.png" width=60% height=60%><br>
+<i>Plot generated in Tableau</i>
 </p>
 <br>
 
