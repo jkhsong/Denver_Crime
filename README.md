@@ -8,7 +8,8 @@
 
 <b><h2>Why this project?</h2></b>
 
-Denver Crime initially started as a small, fun project with <b>Flask, JavaScript, MongoDB, and Python</b>, and grew due to interest from friends in local law-enforcement.  It is currently being tested with Vue.js.<br><br>
+Denver Crime initially started as a small, hobby project with <b>Flask, JavaScript, MongoDB, and Python</b> to showcase interactive queries, data visualization, and basic forecasting [(skip to section)](#forecasting) using Holt-Winters exponential smoothing and additive nonlinear regression models (explanation on the latter below, also see [Prophet model publication](https://www.tandfonline.com/doi/abs/10.1080/00031305.2017.1380080?journalCode=utas20)).  <br><br>Denver Crime then grew due to interest from friends in local law-enforcement.  It is currently being tested with Vue.js.<br><br>
+
 
 <br>
 <p align = "center">
@@ -42,6 +43,29 @@ With the intent of making a full-stack testbed that I could easily repurpose for
 <img src="readme_images/mapdemo.gif" width=90% height=90%><br>
 </p>
 <br>
+
+<b><h2 id="forecasting">Note on forecasting models</h2></b>
+
+It seems reasonable to apply forecasting models which well-accommodates <b>seasonality</b>--both exponential smoothing and Prophet (additive nonlinear regression) do so.  We can see seasonality is accommodated by Prophet (as a periodic Fourier term) in its general mathematical model:
+<p align = "center"><img src="readme_images/eqn1.png" width=20% height=20%></p>
+where <img src="readme_images/eqn1.1.png" height=20px> represents the nonperiodic trend, <img src="readme_images/eqn1.2.png" height=20px> represents the periodic (seasonal) component, and <img src="readme_images/eqn1.3.png" height=20px > represents a normally distributed error term.  Seasonality may occur daily, weekly, monthly, and/or yearly.  Other seasonalities and events such as holidays are accommodated may be accounted for by Prophet as well.<br><br>
+We see such seasonalities in Denver Crime, and the most apparent are weekly and yearly seasonalities: Fridays and Summer/early Fall tend to have the highest reported incidences of crime.  Indeed, even the onset of the COVID pandemic in the US seems to have had little effect on the seasonality of crime.  However, the general (non-periodic) trend in reported crimes appears to be distinctly positive.<br><br>
+Lastly, in the context of policy-making, it is important to be able to form and test hypotheses on trends to <i>determine causative effects</i> (correlation does not imply causation).  To test an independent variable for causative effect, we would need to control for all other variables which may affect the outcome.  These variables may include the weather, quarantine lockdowns, and even the price of cars and car parts (Denver has seen a ~300% increase in the rate of auto theft).<br>
+
+<br>
+<p align = "center">
+<b>Denver Crime Forecast for 2023</b><br>
+<img src="readme_images/crimeforecast.png" width=60% height=60%><br>
+</p>
+<br>
+
+<br>
+<p align = "center">
+<b>Seasonal (periodic) components in Crime Forecast </b><br>
+<img src="readme_images/seasonalcrime.png" width=60% height=60%><br>
+</p>
+<br>
+<p align = "center"> <i>Negative components are part of the <a href=#forecasting>additive model</a>. Forecasts generated with the <a href=https://www.tandfonline.com/doi/abs/10.1080/00031305.2017.1380080?journalCode=utas20>Prophet model</a>.</i></p>
 
 <!-- <p align = "center">
 <img src="readme_images/queryselect.png" width=90% height=90%><br>
