@@ -8,7 +8,7 @@
 
 <b><h2>Why this project?</h2></b>
 
-Denver Crime initially started as a small, hobby project with <b>Flask, JavaScript, MongoDB, and Python</b> to showcase interactive queries, data visualization, and basic forecasting [(skip to section)](#forecasting) using Holt-Winters exponential smoothing and additive nonlinear regression models (explanation on the latter below, also see [Prophet model publication](https://www.tandfonline.com/doi/abs/10.1080/00031305.2017.1380080?journalCode=utas20)).  <br><br>Denver Crime then grew due to interest from friends in local law-enforcement.  It is currently being tested with Vue.js.<br><br>
+Denver Crime initially started as a small, hobby project with <b>Flask, JavaScript, MongoDB, and Python</b> to showcase interactive queries, data visualization, and [seasonal forecasting (skip to section)](#forecasting) using Holt-Winters exponential smoothing and additive nonlinear regression models (explanation on the latter below, also see [Prophet model publication](https://www.tandfonline.com/doi/abs/10.1080/00031305.2017.1380080?journalCode=utas20)).  <br><br>Denver Crime then grew due to interest from friends in local law-enforcement.  It is currently being tested with Vue.js.<br><br>
 
 
 <br>
