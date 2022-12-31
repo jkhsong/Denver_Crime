@@ -111,3 +111,11 @@ In the context of policy-making, it is important to be able to form and test hyp
 3. Implementation of Vue.js elements.
 4. Containerization and deployment to AWS using Docker.
 
+
+<br>
+<p align = "center">
+<b>Motor Crime Hotspots over Time</b> 
+<img src="readme_images/hotspotsvtime2.gif" width=90% height=90%><br>
+</p>
+<br>
+
