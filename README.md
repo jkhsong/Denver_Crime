@@ -12,7 +12,7 @@ Denver Crime initially started as a small, hobby project with <b>Flask, JavaScri
 
 
 <br>
-<p align = "center">
+<p id = "breakdown" align = "center">
 <b>Quick visualization of the dataset</b><br>
 <img src="readme_images/crimebreakdown.png" width=90% height=90%><br>
 </p>
@@ -44,9 +44,9 @@ With the intent of making a full-stack testbed that I could easily repurpose for
 </p>
 <br>
 
-<b><h2 id="forecasting">Note on forecasting models</h2></b>
+<b><h2 id="forecasting">Forecasting Models</h2></b>
 
-It seems reasonable to apply forecasting models which well-accommodates <b>seasonality</b>--both exponential smoothing and Prophet (additive nonlinear regression) do so.  We can see seasonality is accommodated by Prophet (as a periodic Fourier term) in its general mathematical model:
+Given (cyclical) trends in crime over time ([Fig. 2](#breakdown)), it seems reasonable to apply forecasting models which well-accommodates <b>seasonality</b>--both exponential smoothing and Prophet (additive nonlinear regression) do so.  We can see seasonality is accommodated by Prophet (as a periodic Fourier term) in its general mathematical model:
 <p align = "center"><img src="readme_images/eqn1.png" width=20% height=20%></p>  
 
 where <img valign="middle" src="readme_images/eqn1.1.png" height=20px>represents the nonperiodic trend, <img valign="middle" src="readme_images/eqn1.2.png" height=20px>represents the periodic (seasonal) component, and <img valign="middle" src="readme_images/eqn1.3.png" height=15px>represents a normally distributed error term.  Seasonality may occur daily, weekly, monthly, and/or yearly.  Other seasonalities and events such as holidays are accommodated may be accounted for by Prophet as well.<br><br>
