@@ -8,7 +8,7 @@
 
 <b><h2>Why this project?</h2></b>
 
-Denver Crime initially started as a small, hobby project with <b>Flask, JavaScript, MongoDB, and Python</b> to showcase interactive queries, data visualization, and [seasonal forecasting (skip to section)](#forecasting) using Holt-Winters exponential smoothing and additive nonlinear regression models (explanation on the latter below, also see [Prophet model publication](https://www.tandfonline.com/doi/abs/10.1080/00031305.2017.1380080?journalCode=utas20)).  <br><br>Denver Crime then grew due to interest from friends in local law-enforcement.  It is currently being tested with Vue.js.<br><br>
+Denver Crime initially started as a small web-app: A hobby project with <b>Flask, JavaScript, MongoDB, and Python</b> to showcase interactive queries, data visualization, and [seasonal forecasting (skip to section)](#forecasting) using Holt-Winters exponential smoothing and additive nonlinear regression models (explanation on the latter below, also see [Prophet model publication](https://www.tandfonline.com/doi/abs/10.1080/00031305.2017.1380080?journalCode=utas20)).  <br><br>Denver Crime then grew due to interest from friends in local law-enforcement.  It is currently being tested with Vue.js with Tableau embeds.<br><br>
 
 
 <br>
@@ -46,7 +46,7 @@ With the intent of making a full-stack testbed that I could easily repurpose for
 
 <b><h2 id="forecasting">Forecasting Models</h2></b>
 
-Given (cyclical) trends in crime over time ([Fig. 2](#breakdown)), it seems reasonable to apply forecasting models which well-accommodates <b>seasonality</b>--both exponential smoothing and Prophet (additive nonlinear regression) do so.  We can see seasonality is accommodated by Prophet (as a periodic Fourier term) in its general mathematical model:
+Given (cyclical) trends in crime over time ([Fig. 2](#breakdown)), it seems reasonable to apply forecasting models which well-accommodate <b>seasonality</b>--both exponential smoothing and Meta's Prophet forecasting model (additive nonlinear regression) do so.  How does Prophet work?  We can see seasonality is accommodated by Prophet (as a periodic Fourier term) in its general mathematical model:
 <p align = "center"><img src="readme_images/eqn1.png" width=25% height=25%></p>  
 
 where <img valign="middle" src="readme_images/eqn1.1.png" height=20px>represents the nonperiodic trend, <img valign="middle" src="readme_images/eqn1.2.png" height=20px>represents the periodic (seasonal) component, and <img valign="middle" src="readme_images/eqn1.3.png" height=15px>represents a normally distributed error term.  Seasonality may occur daily, weekly, monthly, and/or yearly.  Other seasonalities and events such as holidays are accommodated may be accounted for by Prophet as well.<br><br>
@@ -55,7 +55,23 @@ where <img valign="middle" src="readme_images/eqn1.1.png" height=20px>represents
 We see strong periodic behavior in Denver Crime, and the most apparent are weekly and yearly seasonalities: Fridays and Summer/early Fall tend to have the highest reported incidences of crime.  Indeed, even the onset of the COVID pandemic in the US seems to have had little effect on the seasonality of crime.  However, the general (non-periodic) trend in reported crimes appears to be distinctly positive.<br><br>
 
 <b><h3>How robust is forecasting in accommodating events such as COVID lockdown?</h3></b>
-If we predict upon data up until the onset of the pandemic (but deprive the model of any data after March 2020), Prophet <a href=/readme_images/forecastfailure1.png>fails to forecast</a> the post-COVID increase in reported crimes (see "Forecast on data up until March 2020").  This is due to the non-periodic component fitting to a relatively <a href=/readme_images/forecastfailure1.png>flat period</a> in reported crimes.  Interestingly, with just 8 months more data (up until the end of 2020), Prophet proves over-sensitive to recent trends, <a href=/readme_images/forecastfailure2.png>overpredicting</a> the number of reported crimes by 8% by Summer 2022.  This difference is once again, attributable to the <a href=/readme_images/forecastfailure2.png>non-periodic component disproportionately weighting the increase</a> in reported crimes at the onset of the pandemic. Tuning of the non-periodic component would require de-weighting of recent values.  Since Tableau's exponential smoothing model works in much the same way, a similar adjustment may be required there as well. <br><br>
+If we predict upon data up until the onset of the pandemic (but deprive the model of any data after March 2020), Prophet understandably <a href=/readme_images/forecastfailure1.png>fails to forecast</a> the post-COVID increase in reported crimes (see "Forecast on data up until March 2020").  This is expected, as Prophet's non-periodic component is fitting to the relatively flat period in reported crimes, and has no data regarding crime after the lockdown.<br><br>
+
+<br>
+<p align = "center">
+<b>Clean forecast without post-lockdown data</b><br>
+<img src="readme_images/forecastfailure1.png" width=60% height=60%><br>
+</p>
+<br>
+
+Interestingly, with just 8 months more data (up until the end of 2020--8 months after the onset of lockdowns), Prophet proves <i>slightly over-sensitive</i> to recent trends, <a href=/readme_images/forecastfailure2.png>overpredicting</a> the number of reported crimes by 8% by Summer 2022.  This difference is once again, attributable to the <a href=/readme_images/forecastfailure2.png>non-periodic component disproportionately weighting the increase</a> in reported crimes at the <i>onset</i> of the pandemic. Tuning the non-periodic component would require de-weighting of recent values.  Since Tableau's exponential smoothing model works in much the same way as Prophet's, a similar adjustment may be required there as well. <br><br>
+
+<br>
+<p align = "center">
+<b></b><br>
+<img src="readme_images/forecastfailure2.png" width=60% height=60%><br>
+</p>
+<br>
 
 <b><h3>Should we use forecasting in criminal policy decision-making?</h3></b>
 In the context of policy-making, it is important to be able to form and test hypotheses on trends to <i>determine causative effects</i> (correlation does not imply causation).  To test an independent variable for causative effect, we would need to control for all other variables which may affect the outcome.  These variables may include the weather, quarantine lockdowns, and even the price of cars and car parts (Denver has seen a ~300% increase in the rate of auto theft).<br>
@@ -74,6 +90,7 @@ In the context of policy-making, it is important to be able to form and test hyp
 </p>
 <br>
 <p align = "center"> <i>Negative components are part of the <a href=#forecasting>additive model</a>. Forecasts generated with the <a href=https://www.tandfonline.com/doi/abs/10.1080/00031305.2017.1380080?journalCode=utas20>Prophet model</a>.</i></p>
+
 
 <!-- <p align = "center">
 <img src="readme_images/queryselect.png" width=90% height=90%><br>
@@ -118,4 +135,3 @@ In the context of policy-making, it is important to be able to form and test hyp
 <img src="readme_images/hotspotsvtime2.gif" width=90% height=90%><br>
 </p>
 <br>
-
